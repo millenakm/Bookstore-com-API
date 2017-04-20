@@ -1,0 +1,26 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "jquery": "^3.2.0",
+    "jsdom": "^9.12.0",
+    "morgan": "~1.7.0",
+    "nodemon": "^1.11.0",
+    "serve-favicon": "~2.3.2"
+  },
+  "devDependencies": {
+    "node-code-generator": "^1.0.3",
+    "pug": "~2.0.0-beta10",
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.0",
+    "express": "~4.14.1"
+  }
+}

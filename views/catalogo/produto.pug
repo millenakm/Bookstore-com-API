@@ -1,0 +1,41 @@
+extends ./../layout
+
+block content
+	include ./../navbar.pug
+	h2.titulo-pg Detalhes do Produto
+	div.container.produto
+		div.col-md-9.product-left
+			h3.col-md-12= data.volumeInfo.title
+				span  (cod: #{data.id})
+			div.price.col-md-6
+				-var valor=data.saleInfo.listPrice;
+				-if(valor==undefined){
+					h3.col-md-12 Produto Esgotado
+				-}else{
+					h3.col-md-12 R$ #{parseFloat(valor.amount).toFixed(2).toString().replace('.',',')}
+				-}
+			div.preview.col-md-6
+				h3.col-md-12(data-toggle="modal", data-target="#view") Ler Prévia
+			h2.col-md-12.descTitle Descrição
+			-var desc = data.volumeInfo.description.replace(/<(?:.|\n)*?>/gm, '');
+			p.col-md-12= desc
+		div.col-md-3.product-right
+			-var image = data.volumeInfo.imageLinks.thumbnail.replace('&zoom=1','');
+			img(src=image).col-md-12#img-produto
+			div.col-md-12.descr
+				h3.col-md-12= data.volumeInfo.authors[0]
+				h5.col-md-12 #{data.volumeInfo.publisher}
+				h5.col-md-12 Publicação: #{data.volumeInfo.publishedDate}
+				h5.col-md-12 Páginas: #{data.volumeInfo.pageCount}
+				h5.col-md-12 ISBN: #{data.volumeInfo.industryIdentifiers[0].identifier}
+		div#view.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+			div.modal-dialog.modal-lg(role='document')
+				div.modal-content
+					div.modal-header
+						button.close(type='button', data-dismiss='modal', aria-label='Close')
+							span(aria-hidden='true') &times;
+						h3 Prévia 
+							strong   #{data.volumeInfo.title}
+					div.modal-body
+						div#viewerCanvas.book-view(style="height: 450px; width: 850px;", data-isbn=data.volumeInfo.industryIdentifiers[0].identifier)
+	

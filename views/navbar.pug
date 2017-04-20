@@ -1,0 +1,30 @@
+div.pg-title
+	img(src="../../images/logo-white.png")#pg-title
+nav.navig
+	div.navbar-header
+		button(type="button", data-toggle="collapse",data-target="#colaspse-content", aria-expanded="false").navbar-toggle.collapsed
+			span.sr-only Toggle navigation
+			span.icon-bar
+			span.icon-bar
+			span.icon-bar
+	div.collapse.navbar-collapse#colaspse-content
+		div.navbar-content
+				ul.nav.navbar-nav
+					li
+						a(href="/") Página Inicial
+					li
+						a(href="/catalogo") Catálogo
+					li#logoNav
+						img(src="../../images/logo-white.png", height="50px")
+				ul.nav.navbar-nav.navbar-right
+					li
+						-if(categorias==true){
+							include filtro.pug
+						-}
+					li
+						a#open-search
+							span.glyphicon.glyphicon-search
+					
+
+
+include search.pug

@@ -1,0 +1,52 @@
+extends layout
+
+block content
+	include navbar.pug
+	div.container
+		#myCarousel.carousel.slide(data-ride='carousel')
+			.carousel-inner
+				.item.active
+					a(href='/catalogo/desejo')
+						img(src='../images/wallpaper.jpg')
+						.carousel-caption
+							h3 Lista de Desejos
+							p Não perca nenhuma oferta! Adicione livros à sua lista de desejos e receba notificações quando houverem descontos.
+				.item.catalogo-x(data-filter="Policial")
+					img(src='../images/books5.jpg')
+					.carousel-caption
+						h3 20% de desconto
+						p Categoria policial: todos os livros com 20% de desconto. Aproveite!
+				.item.catalogo-x(data-filter="Poesia")
+					img(src='../images/books2.jpg')
+					.carousel-caption
+						h3 Poesia
+						p Novos livros na categoria Poesia. Vanha conferir!
+				.item.catalogo-x(data-filter="Arqueiro")
+					img(src='../images/books8.jpg')
+					.carousel-caption
+						h3 Editora Arqueiro
+						p Leve 2 livros da editora Arqueiro por R$19,99 cada!
+				.item.catalogo-x(data-filter="Jojo Moyes")
+					img(src='../images/books7.jpg')
+					.carousel-caption
+						h3 Jojo Moyes
+						p "Como eu era antes de você" e "Depois de você" na nossa lista de romances!
+				.item.catalogo-x(data-filter="Coleção")
+					img(src='../images/books.jpg')
+					.carousel-caption
+						h3 Coleções
+						p Novas séries de livros todos os dias
+      
+			ul.nav.nav-pills.nav-justified
+				li.active(data-target='#myCarousel', data-slide-to='0')
+					a(href='#') 
+				li(data-target='#myCarousel', data-slide-to='1')
+					a(href='#') 
+				li(data-target='#myCarousel', data-slide-to='2')
+					a(href='#') 
+				li(data-target='#myCarousel', data-slide-to='3')
+					a(href='#') 
+				li(data-target='#myCarousel', data-slide-to='4')
+					a(href='#') 
+				li(data-target='#myCarousel', data-slide-to='5')
+					a(href='#') 
