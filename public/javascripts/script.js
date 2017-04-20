@@ -76,7 +76,7 @@ function closeSearch(){
 function searchJson(){
 	var api='https://www.googleapis.com/books/v1/volumes?q=intitle:';
 	var key = '&key=AIzaSyDpnzpHdRNWkiZfmLpkNTpuWBnZoKGJ-F4';
-	var quantidade = '&maxResults=20&lang=pt'
+	var quantidade = '&maxResults=20&langRestrict=pt'
 	$('#search-input').keyup(function(){//quando escrever na input, realiza a busca
 		var searchField = $(this).val();
 		if(searchField === '')  {//se não houver nada no campo de busca, limpa a div de resultados
@@ -88,29 +88,22 @@ function searchJson(){
 		var regex = new RegExp(searchField, "i");//define a busca sem case sensitive
 
 		$.get(api+searchField+quantidade+key, function(data){//procura dados na api que tenham no titulo as palavras digitadas
-			console.log(data)
 
-			for(i in data.items){
-
-				var valor=data.items[i].saleInfo.listPrice;
+			for(var i=0; i<data.items.length; i++){
+				
 				var img = data.items[i].volumeInfo.imageLinks;
-
 				if(img==undefined){
 					break;
 				}
-				if(valor==undefined){
-					valor="Produto Esgotado"
-				}else{
-					valor="R$ "+data.items[i].saleInfo.listPrice.amount.toFixed(2).toString().replace('.',',');
-				}
+				var valor = (data.items[i].saleInfo.listPrice==undefined)?"Produto Esgotado":"R$ "+data.items[i].saleInfo.listPrice.amount.toFixed(2).toString().replace('.',',');
 
-				var titulo = data.items[i].volumeInfo.title;
-				//mostra a div de resultados e printa 
+				var autor = (data.items[i].volumeInfo.authors==undefined)?"Desconhecido":data.items[i].volumeInfo.authors;
+				// mostra a div de resultados e printa 
 				results+='<tr id="livros">'
 				+'<td class="cod"><a href="http://localhost:3000/catalogo/produto/'+data.items[i].id+'"><img src="'+data.items[i].volumeInfo.imageLinks.thumbnail
 				+'" height="150px"></a></td>'
 				+'<td class="colored">'+data.items[i].volumeInfo.title+'</td>'
-				+'<td class="autor">'+data.items[i].volumeInfo.authors[0]+'</td>'
+				+'<td class="autor">'+autor+'</td>'
 				+'<td class="colored">'+valor+'</td>'
 				+'</tr>';
 
@@ -186,10 +179,10 @@ function createCatalogo(editora){
 			}else{
 				valor="R$ "+data.items[i].saleInfo.listPrice.amount.toFixed(2).toString().replace('.',',');
 			}
-			$("#catalogo").append('<div class="grid col-md-4 col-lg-4 col-sm-6 isbn"><a href="catalogo/produto/'+data.items[i].id+'"><figure class="effect-terry"><img src="'
-				+data.items[i].volumeInfo.imageLinks.thumbnail+'"><div class="infoCatalogo"><h2 class="tagsNome col-md-7">'
+			$("#catalogo").append('<div class="grid col-md-3 col-lg-3 col-sm-6 isbn"><a href="catalogo/produto/'+data.items[i].id+'"><figure class="effect-terry"><img src="'
+				+data.items[i].volumeInfo.imageLinks.thumbnail+'"><div class="infoCatalogo"><h2 class="tagsNome col-md-12">'
 				+data.items[i].volumeInfo.title+'<br><span>'+data.items[i].volumeInfo.authors[0]
-				+'</span></h2><h2 class="tagsPreco col-md-5">'+valor+
+				+'</span></h2><h2 class="tagsPreco col-md-12">'+valor+
 				'</div></figure></a></div>');
 		}
 	});
